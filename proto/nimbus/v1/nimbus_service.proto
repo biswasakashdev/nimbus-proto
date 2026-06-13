@@ -4,7 +4,7 @@ package nimbus.v1;
 
 import "nimbus/v1/types/v1/files.proto";
 
-service NimbusVaultService {
+service NimbusService {
   // Update the access type of the object PUBLIC/PRIVATE.
   rpc UpdateAccessType(UpdateAccessTypeRequest) returns (UpdateAccessTypeResponse);
 
