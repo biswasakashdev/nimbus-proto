@@ -5,7 +5,7 @@ package nimbus.v1;
 import "nimbus/v1/types/v1/files.proto";
 
 // This service is only to used to send and recive the raw data bytes.
-service NimbusVaultObjectService {
+service NimbusObjectService {
 
   rpc CreateOrUpdateObject(stream CreateOrUpdateObjectRequest) returns (CreateOrUpdateObjectResponse);
 
