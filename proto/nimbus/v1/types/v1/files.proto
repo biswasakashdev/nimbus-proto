@@ -1,24 +1,22 @@
 syntax = "proto3";
 
-package cloudstorage.v1.types.v1;
+package nimbus.v1.types.v1;
 
+
+// Either a file or a directory.
 enum ObjectType {
   OBJECT_TYPE_UNSPECIFIED = 0;
   OBJECT_TYPE_FILE = 1;
   OBJECT_TYPE_DIRECTORY = 2;
 }
 
+// Either Public or Private
 enum AccessType {
   ACCESS_TYPE_UNSPECIFIED = 0;
   ACCESS_TYPE_PRIVATE = 1;
   ACCESS_TYPE_PUBLIC = 2;
 }
 
-message ObjectMetadata {
-  ObjectType object_type = 1;
-  AccessType access_type = 2;
-  string object_id = 4;
-}
 
 // The access information of an object it can be used via public url or only access using personal access token.
 message ObjectAccessInfo {

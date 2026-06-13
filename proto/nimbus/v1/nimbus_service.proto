@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package nimbus.v1;
+
+import "nimbus/v1/types/v1/files.proto";
+
+service NimbusVaultService {
+  // Update the access type of the object PUBLIC/PRIVATE.
+  rpc UpdateAccessType(UpdateAccessTypeRequest) returns (UpdateAccessTypeResponse);
+
+  // Delete an object.
+  rpc DeleteObject(DeleteObjectRequest) returns (DeleteObjectResponse);
+
+  // If a valid directory found then returns it objects.
+  rpc GetDirectoryContent(GetDirectoryContentRequest) returns (stream GetDirectoryContentResponse);
+
+  rpc FindObjectByName(FindObjectByNameRequest) returns (FindObjectByNameResponse);
+
+}
+
+message DeleteObjectRequest {
+  repeated string object_id = 1;
+}
+message DeleteObjectResponse {
+  repeated string object_id = 1;
+}
+
+message UpdateAccessTypeRequest {
+  repeated nimbus.v1.types.v1.ObjectAccessInfo object_access_info = 1;
+}
+
+message UpdateAccessTypeResponse {
+  repeated nimbus.v1.types.v1.ObjectAccessInfo object_access_info = 1;
+}
+
+message GetDirectoryContentRequest {
+  string object_id = 1;
+  string off_set = 2;
+  string count = 3;
+}
+
+message GetDirectoryContentResponse {
+
+  message ObjectInfo {
+    string object_id = 1;
+    nimbus.v1.types.v1.AccessType access_type = 2;
+    nimbus.v1.types.v1.ObjectType object_type = 3;
+    string created_on = 4;
+  }
+  uint64 object_count = 1;
+  repeated ObjectInfo objects = 2;
+}
+
+message FindObjectByNameRequest {
+  string object_id = 1;
+}
+message FindObjectByNameResponse {
+  oneof data {
+    nimbus.v1.types.v1.ObjectDetails object = 1;
+    string error = 2;
+  }
+}
