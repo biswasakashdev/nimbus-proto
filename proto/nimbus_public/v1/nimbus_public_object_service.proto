@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package nimbus.v1;
+package nimbus_public.v1;
 
-import "nimbus/v1/types/v1/files.proto";
+import "nimbus_public/v1/types/v1/files.proto";
 
 // This service is only to used to send and recive the raw data bytes.
-service NimbusObjectService {
+service NimbusPublicObjectService {
 
   // Upload the bytes.
   rpc CreateOrUpdateObject(stream CreateOrUpdateObjectRequest) returns (CreateOrUpdateObjectResponse);
@@ -27,7 +27,7 @@ message CreateOrUpdateObjectRequest {
 message CreateOrUpdateObjectResponse {
   oneof response {
     string error_message = 2;
-    nimbus.v1.types.v1.ObjectDetails object_details = 3;
+    nimbus_public.v1.types.v1.ObjectDetails object_details = 3;
   }
 }
 

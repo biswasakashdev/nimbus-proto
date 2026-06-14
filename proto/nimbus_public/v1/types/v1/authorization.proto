@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package nimbus.v1.types.v1;
+package nimbus_public.v1.types.v1;
 
 // The authorization sent over the header to access the Objects.
 message Authorization {

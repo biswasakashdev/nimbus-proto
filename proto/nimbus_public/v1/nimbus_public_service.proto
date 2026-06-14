@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package nimbus.v1;
+package nimbus_public.v1;
 
-import "nimbus/v1/types/v1/files.proto";
+import "nimbus_public/v1/types/v1/files.proto";
 
-service NimbusService {
+service NimbusPublicService {
   // Update the access type of the object PUBLIC/PRIVATE.
   rpc UpdateAccessType(UpdateAccessTypeRequest) returns (UpdateAccessTypeResponse);
 
@@ -18,11 +18,11 @@ service NimbusService {
 
 
 message UpdateAccessTypeRequest {
-  repeated nimbus.v1.types.v1.ObjectAccessInfo object_access_info = 1;
+  repeated nimbus_public.v1.types.v1.ObjectAccessInfo object_access_info = 1;
 }
 
 message UpdateAccessTypeResponse {
-  repeated nimbus.v1.types.v1.ObjectAccessInfo object_access_info = 1;
+  repeated nimbus_public.v1.types.v1.ObjectAccessInfo object_access_info = 1;
 }
 
 message GetDirectoryContentRequest {
@@ -35,8 +35,8 @@ message GetDirectoryContentResponse {
 
   message ObjectInfo {
     string object_id = 1;
-    nimbus.v1.types.v1.AccessType access_type = 2;
-    nimbus.v1.types.v1.ObjectType object_type = 3;
+    nimbus_public.v1.types.v1.AccessType access_type = 2;
+    nimbus_public.v1.types.v1.ObjectType object_type = 3;
     string created_on = 4;
   }
   uint64 object_count = 1;
@@ -48,7 +48,7 @@ message FindObjectByNameRequest {
 }
 message FindObjectByNameResponse {
   oneof data {
-    nimbus.v1.types.v1.ObjectDetails object = 1;
+    nimbus_public.v1.types.v1.ObjectDetails object = 1;
     string error = 2;
   }
 }
