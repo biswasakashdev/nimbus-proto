@@ -11,13 +11,9 @@ service NimbusObjectService {
 
   rpc GetObject(GetObjectRequest) returns (stream GetObjectResponse);
 
-}
+    // Delete an object.
+  rpc DeleteObject(DeleteObjectRequest) returns (DeleteObjectResponse);
 
-// Status represents the status of an operation.
-enum Status {
-  STATUS_UNSPECIFIED = 0;
-  STATUS_FAILED = 1;
-  STATUS_SUCCESS = 2;
 }
 
 // Stream of bytes of the file.
@@ -41,4 +37,11 @@ message GetObjectRequest {
 // The stream of bytes of the file.
 message GetObjectResponse {
   bytes data = 1;
+}
+
+message DeleteObjectRequest {
+  repeated string object_id = 1;
+}
+message DeleteObjectResponse {
+  repeated string object_id = 1;
 }

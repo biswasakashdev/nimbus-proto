@@ -8,9 +8,6 @@ service NimbusService {
   // Update the access type of the object PUBLIC/PRIVATE.
   rpc UpdateAccessType(UpdateAccessTypeRequest) returns (UpdateAccessTypeResponse);
 
-  // Delete an object.
-  rpc DeleteObject(DeleteObjectRequest) returns (DeleteObjectResponse);
-
   // If a valid directory found then returns it objects.
   rpc GetDirectoryContent(GetDirectoryContentRequest) returns (stream GetDirectoryContentResponse);
 
@@ -18,12 +15,7 @@ service NimbusService {
 
 }
 
-message DeleteObjectRequest {
-  repeated string object_id = 1;
-}
-message DeleteObjectResponse {
-  repeated string object_id = 1;
-}
+
 
 message UpdateAccessTypeRequest {
   repeated nimbus.v1.types.v1.ObjectAccessInfo object_access_info = 1;
