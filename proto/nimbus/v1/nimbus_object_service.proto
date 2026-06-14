@@ -7,8 +7,10 @@ import "nimbus/v1/types/v1/files.proto";
 // This service is only to used to send and recive the raw data bytes.
 service NimbusObjectService {
 
+  // Upload the bytes.
   rpc CreateOrUpdateObject(stream CreateOrUpdateObjectRequest) returns (CreateOrUpdateObjectResponse);
 
+  // Read the bytes from the data.
   rpc GetObject(GetObjectRequest) returns (stream GetObjectResponse);
 
     // Delete an object.
@@ -40,8 +42,8 @@ message GetObjectResponse {
 }
 
 message DeleteObjectRequest {
-  repeated string object_id = 1;
+  repeated string object_ids = 1;
 }
 message DeleteObjectResponse {
-  repeated string object_id = 1;
+  repeated string object_ids = 1;
 }
