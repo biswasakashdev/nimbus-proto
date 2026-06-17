@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package nimbus_public.v1.types.v1;
-
-// The authorization sent over the header to access the Objects.
-message Authorization {
-  string token = 1;
-}
