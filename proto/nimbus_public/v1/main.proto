@@ -65,7 +65,7 @@ service NimbusPublicService {
   rpc GetDirectoryContent(GetDirectoryContentRequest) returns (stream GetDirectoryContentResponse);
 
   // The file id looks like files/names.txt
-  rpc FindObjectByName(FindObjectByNameRequest) returns (FindObjectByNameResponse);
+  rpc FindObjectById(FindObjectByIdRequest) returns (FindObjectByIdResponse);
 }
 
 // Stream of bytes of the file.
@@ -123,9 +123,9 @@ message GetDirectoryContentResponse {
   repeated ObjectInfo objects = 4;
 }
 
-message FindObjectByNameRequest {
+message FindObjectByIdRequest {
   string object_id = 1;
 }
-message FindObjectByNameResponse {
+message FindObjectByIdResponse {
   ObjectDetails object = 1;
 }
