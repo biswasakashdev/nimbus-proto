@@ -62,7 +62,7 @@ service NimbusPublicService {
   rpc UpdateAccessType(UpdateAccessTypeRequest) returns (UpdateAccessTypeResponse);
 
   // If a valid directory found then returns it objects.
-  rpc GetDirectoryContent(GetDirectoryContentRequest) returns (stream GetDirectoryContentResponse);
+  rpc GetDirectoryContent(GetDirectoryContentRequest) returns (GetDirectoryContentResponse);
 
   // The file id looks like files/names.txt
   rpc FindObjectById(FindObjectByIdRequest) returns (FindObjectByIdResponse);
@@ -118,8 +118,6 @@ message GetDirectoryContentResponse {
     string created_on = 5;
   }
   uint64 object_count = 1;
-  uint64 page = 2;
-  uint32 page_size = 3;
   repeated ObjectInfo objects = 4;
 }
 
