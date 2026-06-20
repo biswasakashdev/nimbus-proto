@@ -2,10 +2,6 @@ syntax = "proto3";
 
 package nimbus_public.v1;
 
-// The authorization sent over the header to access the Objects.
-message Authorization {
-  string token = 1;
-}
 
 // Either a file or a directory.
 enum ObjectType {
@@ -41,9 +37,10 @@ message ObjectDetails {
   uint64 object_size = 3;
   AccessType access_type = 4;
   string created_on = 5;
-  map<string, string> meta_data = 6;
   // image/jpeg, image/png, text/plain
-  optional string content_type = 7;
+  string content_type = 6;
+  
+  map<string, string> meta_data = 7;
   // The access url of a directory is referd as static directory which serve static contents.
   optional string access_url = 8;
 }
@@ -66,6 +63,12 @@ service NimbusPublicService {
 
   // The file id looks like files/names.txt
   rpc FindObjectById(FindObjectByIdRequest) returns (FindObjectByIdResponse);
+
+  // Update the move, replace if file already exist.
+  rpc RenameFile(RenameFileRequest) returns (RenameFileResponse);
+
+  // Copy the file to another location.
+  rpc CopyFile(CopyFileRequest) returns(CopyFileResponse);
 }
 
 // Stream of bytes of the file.
@@ -104,7 +107,8 @@ message UpdateAccessTypeResponse {
 }
 
 message GetDirectoryContentRequest {
-  string object_id = 1;
+  // If no directory given returns the root system.
+  optional string object_id = 1;
   string off_set = 2;
   string count = 3;
 }
