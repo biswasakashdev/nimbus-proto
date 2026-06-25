@@ -2,37 +2,7 @@ syntax = "proto3";
 
 package nimbus_public.v1;
 
-
-// Either a file or a directory.
-enum ObjectType {
-  OBJECT_TYPE_UNSPECIFIED = 0;
-  OBJECT_TYPE_FILE = 1;
-  OBJECT_TYPE_DIRECTORY = 2;
-}
-
-// Either Public or Private
-enum AccessType {
-  ACCESS_TYPE_UNSPECIFIED = 0;
-  ACCESS_TYPE_PRIVATE = 1;
-  ACCESS_TYPE_PUBLIC = 2;
-}
-
-
-
-// The details of any object it can be file or a directory and the access url if the object is public otherwise it can be only access via personal access token.
-message ObjectDetails {
-  ObjectType object_type = 1;
-  string object_id = 2;
-  uint64 object_size = 3;
-  AccessType access_type = 4;
-  string created_on = 5;
-  // image/jpeg, image/png, text/plain
-  string content_type = 6;
-  
-  map<string, string> meta_data = 7;
-  // The access url of a directory is referd as static directory which serve static contents.
-  optional string access_url = 8;
-}
+import "nimbus_public/v1/types.proto";
 
 service NimbusPublicService {
   // Upload the bytes.
@@ -57,7 +27,7 @@ service NimbusPublicService {
   rpc RenameFile(RenameFileRequest) returns (RenameFileResponse);
 
   // Copy the file to another location.
-  rpc CopyFile(CopyFileRequest) returns(CopyFileResponse);
+  rpc CopyFile(CopyFileRequest) returns (CopyFileResponse);
 }
 
 // Stream of bytes of the file.
@@ -67,7 +37,7 @@ message PutObjectRequest {
 
 // After sending the bytes either getting the object response or the error message from the server.
 message PutObjectResponse {
-  ObjectDetails object_details = 1;
+  nimbus_public.v1.ObjectDetails object_details = 1;
 }
 
 // Object id is like the file id, this id must be a file path not a directory or invalid file name.
@@ -90,14 +60,14 @@ message DeleteObjectResponse {
 // Update access type
 message UpdateAccessTypeRequest {
   repeated string object_ids = 1;
-  AccessType access_type = 2;
+  nimbus_public.v1.AccessType access_type = 2;
 }
 
 message UpdateAccessTypeResponse {
   // The access information of an object it can be used via public url or only access using personal access token.
   message ObjectAccessInfo {
     string object_id = 1;
-    AccessType access_type = 2;
+    nimbus_public.v1.AccessType access_type = 2;
     optional string access_url = 3;
   }
   repeated ObjectAccessInfo object_access_info = 1;
@@ -111,12 +81,11 @@ message GetDirectoryContentRequest {
   string count = 3;
 }
 
-
 message GetDirectoryContentResponse {
   message ObjectInfo {
     string object_id = 1;
-    AccessType access_type = 2;
-    ObjectType object_type = 3;
+    nimbus_public.v1.AccessType access_type = 2;
+    nimbus_public.v1.ObjectType object_type = 3;
     string content_type = 4;
     string created_on = 5;
   }
@@ -129,25 +98,24 @@ message FindObjectByIdRequest {
   string object_id = 1;
 }
 message FindObjectByIdResponse {
-  ObjectDetails object = 1;
+  nimbus_public.v1.ObjectDetails object = 1;
 }
 
-// RenameFile 
-message RenameFileRequest{
+// RenameFile
+message RenameFileRequest {
   repeated string object_ids = 1;
   optional string destination = 2;
 }
 
-message RenameFileResponse{
+message RenameFileResponse {
   repeated string object_ids = 1;
 }
 
 // Copy files
-//
-message CopyFileRequest{
+message CopyFileRequest {
   repeated string object_ids = 1;
   optional string destination = 2;
 }
-message CopyFileResponse{
+message CopyFileResponse {
   repeated string object_ids = 1;
 }

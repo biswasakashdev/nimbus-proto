@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package nimbus_public.v1;
+
+import "nimbus_public/v1/types.proto";
+
+service UrlGeneratorService {
+  rpc GetUrl(GetUrlRequest) returns (GetUrlResponse);
+}
+
+message GetUrlRequest {
+  string object_id = 1;
+  nimbus_public.v1.AccessType access_type = 2;
+}
+
+message GetUrlResponse {
+  string url = 1;
+}
