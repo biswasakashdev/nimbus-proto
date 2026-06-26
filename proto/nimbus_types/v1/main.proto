@@ -1,7 +1,6 @@
 syntax = "proto3";
 
-package nimbus_public.v1;
-
+package nimbus_types.v1;
 
 // Either a file or a directory.
 enum ObjectType {
@@ -26,7 +25,7 @@ message ObjectDetails {
   string created_on = 5;
   // image/jpeg, image/png, text/plain
   string content_type = 6;
-  
+
   map<string, string> meta_data = 7;
   // The access url of a directory is referd as static directory which serve static contents.
   optional string access_url = 8;

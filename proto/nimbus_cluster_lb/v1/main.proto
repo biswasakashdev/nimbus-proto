@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package nimbus_public.v1;
+package nimbus_cluster_lb.v1;
 
-import "nimbus_public/v1/types.proto";
+import "nimbus_types/v1/main.proto";
 
 service UrlGeneratorService {
   rpc GetUrl(GetUrlRequest) returns (GetUrlResponse);
@@ -10,7 +10,7 @@ service UrlGeneratorService {
 
 message GetUrlRequest {
   string object_id = 1;
-  nimbus_public.v1.AccessType access_type = 2;
+  nimbus_types.v1.AccessType access_type = 2;
 }
 
 message GetUrlResponse {

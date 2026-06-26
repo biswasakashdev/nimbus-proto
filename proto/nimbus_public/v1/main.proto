@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package nimbus_public.v1;
 
-import "nimbus_public/v1/types.proto";
+import "nimbus_types/v1/main.proto";
 
 service NimbusPublicService {
   // Upload the bytes.
@@ -37,7 +37,7 @@ message PutObjectRequest {
 
 // After sending the bytes either getting the object response or the error message from the server.
 message PutObjectResponse {
-  nimbus_public.v1.ObjectDetails object_details = 1;
+  nimbus_types.v1.ObjectDetails object_details = 1;
 }
 
 // Object id is like the file id, this id must be a file path not a directory or invalid file name.
@@ -60,14 +60,14 @@ message DeleteObjectResponse {
 // Update access type
 message UpdateAccessTypeRequest {
   repeated string object_ids = 1;
-  nimbus_public.v1.AccessType access_type = 2;
+  nimbus_types.v1.AccessType access_type = 2;
 }
 
 message UpdateAccessTypeResponse {
   // The access information of an object it can be used via public url or only access using personal access token.
   message ObjectAccessInfo {
     string object_id = 1;
-    nimbus_public.v1.AccessType access_type = 2;
+    nimbus_types.v1.AccessType access_type = 2;
     optional string access_url = 3;
   }
   repeated ObjectAccessInfo object_access_info = 1;
@@ -84,8 +84,8 @@ message GetDirectoryContentRequest {
 message GetDirectoryContentResponse {
   message ObjectInfo {
     string object_id = 1;
-    nimbus_public.v1.AccessType access_type = 2;
-    nimbus_public.v1.ObjectType object_type = 3;
+    nimbus_types.v1.AccessType access_type = 2;
+    nimbus_types.v1.ObjectType object_type = 3;
     string content_type = 4;
     string created_on = 5;
   }
@@ -98,7 +98,7 @@ message FindObjectByIdRequest {
   string object_id = 1;
 }
 message FindObjectByIdResponse {
-  nimbus_public.v1.ObjectDetails object = 1;
+  nimbus_types.v1.ObjectDetails object = 1;
 }
 
 // RenameFile
